@@ -7,6 +7,8 @@ import { StripeModule } from './stripe/stripe.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { FoodModule } from './food/food.module';
+import { Food } from './food/entities/food-entity';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { AuthModule } from './auth/auth.module';
           username: config.get<string>('TYPEORM_USER'),
           password: config.get<string>('TYPEORM_PASSWORD'),
           synchronize: true,
-          entities: [User],
+          entities: [User, Food],
           logging: true,
         };
       },
@@ -33,6 +35,7 @@ import { AuthModule } from './auth/auth.module';
     StripeModule,
     UserModule,
     AuthModule,
+    FoodModule,
   ],
   controllers: [AppController],
   providers: [AppService],
