@@ -11,5 +11,13 @@ export class AddCreditCardDto {
 
   @IsString()
   @IsNotEmpty()
+  exp_month: string;
+
+  @IsString()
+  @IsNotEmpty()
+  exp_year: string;
+
+  @IsString()
+  @IsNotEmpty()
   zip: string;
 }

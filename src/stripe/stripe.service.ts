@@ -52,17 +52,21 @@ export class StripeService {
       card: {
         number: body.cardNumber,
         cvc: body.cvc,
-        exp_month: '12',
-        exp_year: '2026',
+        exp_month: body.exp_month,
+        exp_year: body.exp_year,
         address_zip: body.zip,
       },
+    });
+
+    const source = await this.stripe.customers.createSource(customerId, {
+      source: token.id,
     });
 
     const charge = await this.stripe.charges.create({
       amount: 2000,
       customer: customerId,
-      currency: 'usd',
-      source: token.id,
+      currency: 'eur',
+      source: source.id,
       description: 'Example charge',
     });
 

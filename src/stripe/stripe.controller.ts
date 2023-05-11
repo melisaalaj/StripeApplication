@@ -4,10 +4,15 @@ import { AddCreditCardDto } from './dto/create-CreditCard.dto';
 import RequestWithUser from 'src/auth/requestWithUser.interface';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
+import { CurrentUser } from 'src/auth/currentUser';
+import { UserService } from 'src/user/user.service';
 
 @Controller('stripe')
 export class StripeController {
-  constructor(private readonly stripeService: StripeService) {}
+  constructor(
+    private readonly stripeService: StripeService,
+    private readonly userService: UserService,
+  ) {}
 
   @Post('charge')
   async charge(@Body() body: AddCreditCardDto) {
@@ -18,12 +23,13 @@ export class StripeController {
   @Post('chargeWithUser')
   async chargeWithUser(
     @Body() body: AddCreditCardDto,
-    @Req() request: RequestWithUser,
+    @CurrentUser() user: any,
   ) {
-    console.log(request);
+    const currentUser = await this.userService.findByEmail(user.email);
+    console.log(currentUser);
     return await this.stripeService.chargeWithUser(
       body,
-      request.user.stripeCustomerId,
+      currentUser.stripeCustomerId,
     );
   }
 }
