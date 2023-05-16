@@ -7,6 +7,7 @@ import { User } from 'src/user/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants/constants';
 import { StripeModule } from 'src/stripe/stripe.module';
+import { MailerModule } from 'src/mailer/mailer.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { StripeModule } from 'src/stripe/stripe.module';
       signOptions: { expiresIn: '60m' },
     }),
     StripeModule,
+    MailerModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, UserService],

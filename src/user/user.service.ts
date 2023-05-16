@@ -62,4 +62,8 @@ export class UserService {
     const user = await this.findOne(userId);
     await this.userRepository.remove(user);
   }
+
+  findUserByName() {
+    
+  }
 }

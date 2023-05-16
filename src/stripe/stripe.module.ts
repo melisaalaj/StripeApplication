@@ -8,7 +8,7 @@ import { Food } from 'src/food/entities/food-entity';
 import { FoodService } from 'src/food/food.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User ]),TypeOrmModule.forFeature([Food])],
+  imports: [TypeOrmModule.forFeature([User]), TypeOrmModule.forFeature([Food])],
   providers: [StripeService, UserService, FoodService],
   controllers: [StripeController],
   exports: [StripeService],

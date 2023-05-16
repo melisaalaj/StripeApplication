@@ -9,6 +9,7 @@ import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { FoodModule } from './food/food.module';
 import { Food } from './food/entities/food-entity';
+import { MailerModule } from './mailer/mailer.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { Food } from './food/entities/food-entity';
     UserModule,
     AuthModule,
     FoodModule,
+    MailerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
